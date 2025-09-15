@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universo Geek</title>
+    <link rel="stylesheet" href="{% static 'noticias/css/style.css' %}">
+</head>
+<body>
+    <div class="logo">
+        <a href="{% url 'lista_noticias' %}" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+            {% if site_config and site_config.banner %}
+                <img src="{{ site_config.banner.url }}" alt="Universo Geek Banner" style="height: 40px; margin-right: 8px;">
+            {% endif %}
+
+            <h1>Universo Geek</h1>
+        </a>
+    </div>
+
+
+    <!-- Conteúdo principal -->
+    <main>
+        <h2 class="news-title">News</h2>
+
+        <section class="news-list">
+            {% for noticia in noticias %}
+            <article class="news-item">
+                <h3>{{ noticia.titulo_lista }}</h3>
+                <a href="{% url 'detalhe_noticia' noticia.id %}">
+                    <button>Ver news</button>
+                </a>
+            </article>
+            {% empty %}
+            <p>Não há notícias cadastradas no momento.</p>
+            {% endfor %}
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Copyright © 2025 Universo Geek. Todos os direitos reservados.</p>
+        <p>CNPJ: 12.123.456/0000-12</p>
+    </footer>
+</body>
+</html>
